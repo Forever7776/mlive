@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <!--
+    Default Cache configuration. These settings will be applied to caches
+    created programmatically using CacheManager.add(String cacheName).
+    This element is optional, and using CacheManager.add(String cacheName) when
+    its not present will throw CacheException
+
+    The defaultCache has an implicit name "default" which is a reserved cache name.
+    -->
+    <defaultCache
+            maxEntriesLocalHeap="10000"
+            eternal="false"
+            overflowToDisk="true"
+            timeToIdleSeconds="20"
+            timeToLiveSeconds="60">
+    </defaultCache>
+
+    <!-- 存放用户登录信息，过期时间 3600秒，用ehache替换session功能 -->
+    <cache name="session"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+
+    <!-- 缓存半小时 -->
+    <cache name="halfHour"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+
+
+    <!-- 存放account用户 24小时 -->
+    <cache name="wxdata"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="86400"
+           timeToLiveSeconds="86400"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+    <!-- 平台缓存数据 -->
+    <cache name="pfdata"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="86400"
+           timeToLiveSeconds="86400"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+    <!-- 库存缓存数据 -->
+    <cache name="stockdata"
+           maxElementsInMemory="10000"
+           eternal="true"
+           overflowToDisk="true"
+           memoryStoreEvictionPolicy="FIFO"/>
+
+    <!-- 城市数据 -->
+    <cache name="citydata"
+           maxElementsInMemory="10000"
+           eternal="true"
+           overflowToDisk="true"
+           memoryStoreEvictionPolicy="FIFO"/>
+</ehcache>
